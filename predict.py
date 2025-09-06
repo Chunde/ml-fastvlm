@@ -83,7 +83,7 @@ def predict(args):
             temperature=args.temperature,
             top_p=args.top_p,
             num_beams=args.num_beams,
-            max_new_tokens=256,
+            max_new_tokens=512,
             use_cache=True,
         )
 
