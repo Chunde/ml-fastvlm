@@ -60,6 +60,19 @@ python predict.py --model-path /path/to/checkpoint-dir \
                   --prompt "Describe the image."
 ```
 
+### Interactive Usage (Faster for Multiple Images)
+For faster inference on multiple images without reloading the model, use our interactive script:
+
+```bash
+python predict_interactive.py --model-path /path/to/checkpoint-dir
+```
+
+This script provides two modes:
+1. **Interactive Mode**: Enter image paths one by one after the model loads
+2. **Batch Mode**: Process multiple images from a list file
+
+See [README_INTERACTIVE.md](README_INTERACTIVE.md) for detailed instructions.
+
 ### Inference on Apple Silicon
 To run inference on Apple Silicon, pytorch checkpoints have to be exported to format 
 suitable for running on Apple Silicon, detailed instructions and code can be found [`model_export`](model_export/) subfolder.
