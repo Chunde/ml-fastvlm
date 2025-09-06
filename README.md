@@ -81,7 +81,11 @@ See [README_INTERACTIVE.md](README_INTERACTIVE.md) for detailed instructions.
 For a more user-friendly experience, we provide a GUI version:
 
 ```bash
+# Launch GUI with automatic model path
 python predict_gui.py --model-path /path/to/checkpoint-dir
+
+# Or launch GUI and select model manually
+python predict_gui.py
 ```
 
 Features:

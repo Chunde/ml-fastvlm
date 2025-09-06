@@ -16,6 +16,7 @@ import argparse
 # Add the project root to Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+import argparse
 from llava.utils import disable_torch_init
 from llava.conversation import conv_templates
 from llava.model.builder import load_pretrained_model
@@ -346,8 +347,22 @@ class FastVLMGUI:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="FastVLM GUI for image captioning")
+    parser.add_argument("--model-path", type=str, default=None, help="Path to model checkpoint directory")
+    parser.add_argument("--auto-load", action="store_true", help="Automatically load the model if path is provided")
+    args = parser.parse_args()
+    
     root = tk.Tk()
     app = FastVLMGUI(root)
+    
+    # If model path is provided, set it in the GUI
+    if args.model_path:
+        app.model_path_var.set(args.model_path)
+        # Optionally, automatically load the model
+        if args.auto_load:
+            # Schedule the model loading after the UI is fully initialized
+            root.after(100, app.load_model)
+    
     root.mainloop()
 
 

@@ -20,6 +20,12 @@ A graphical user interface for FastVLM image captioning that provides an easy-to
 # Direct execution
 python predict_gui.py
 
+# With automatic model path
+python predict_gui.py --model-path /path/to/checkpoint-dir
+
+# With automatic model path and auto-loading
+python predict_gui.py --model-path /path/to/checkpoint-dir --auto-load
+
 # Or using the launch scripts
 ./predict_gui.sh        # Linux/macOS
 predict_gui.bat         # Windows
