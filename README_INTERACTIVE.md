@@ -31,6 +31,8 @@ pip install --user sympy
 1. **Interactive Mode**: Load the model once and continuously input new images for captioning
 2. **Batch Mode**: Process multiple images from a list file
 3. **Custom Prompts**: Use different prompts for each image or a single prompt for all images
+4. **Path Handling**: Properly handles file paths with spaces and special characters
+5. **Bug Fixes**: Fixed issues with argument handling in prediction loop
 
 ## Usage
 

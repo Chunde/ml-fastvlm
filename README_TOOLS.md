@@ -11,6 +11,8 @@ A faster alternative to the standard [predict.py](file:///D:/Development/GitHub/
 - **Batch Mode**: Process multiple images from a list file
 - **Custom Prompts**: Use different prompts for each image or a single prompt for all images
 - **Much faster**: The model is loaded only once, not for each image
+- **Path Handling**: Properly handles file paths with spaces and special characters
+- **Bug Fixes**: Fixed issues with argument handling in prediction loop
 
 ### Usage:
 ```bash

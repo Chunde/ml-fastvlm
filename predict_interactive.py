@@ -46,7 +46,7 @@ class FastVLMInteractive:
         # Set the pad token id for generation
         self.model.generation_config.pad_token_id = self.tokenizer.pad_token_id
 
-    def predict(self, image_file, prompt="Describe the image."):
+    def predict(self, image_file, prompt="Describe the image.", temperature=0.2, top_p=None, num_beams=1):
         # Construct prompt
         qs = prompt
         if self.model.config.mm_use_im_start_end:
@@ -82,10 +82,10 @@ class FastVLMInteractive:
                 input_ids,
                 images=image_tensor.unsqueeze(0).half(),
                 image_sizes=[image.size],
-                do_sample=True if args.temperature > 0 else False,
-                temperature=args.temperature,
-                top_p=args.top_p,
-                num_beams=args.num_beams,
+                do_sample=True if temperature > 0 else False,
+                temperature=temperature,
+                top_p=top_p,
+                num_beams=num_beams,
                 max_new_tokens=512,
                 use_cache=True,
             )
@@ -133,13 +133,21 @@ def main():
             
         print(f"Processing {len(image_paths)} images in batch mode...")
         for i, image_path in enumerate(image_paths):
+            # Handle paths with spaces or special characters
+            image_path = image_path.strip('"\'')  # Remove surrounding quotes if any
             if not os.path.exists(image_path):
                 print(f"Warning: File '{image_path}' not found. Skipping.")
                 continue
                 
             try:
                 print(f"[{i+1}/{len(image_paths)}] Processing '{image_path}'...")
-                result = predictor.predict(image_path, args.prompt)
+                result = predictor.predict(
+                    image_path, 
+                    args.prompt, 
+                    temperature=args.temperature,
+                    top_p=args.top_p,
+                    num_beams=args.num_beams
+                )
                 print(f"Caption: {result}\n")
             except Exception as e:
                 print(f"Error processing '{image_path}': {str(e)}\n")
@@ -157,6 +165,9 @@ def main():
             if image_path.lower() in ['quit', 'exit', 'q']:
                 break
                 
+            # Handle paths with spaces - remove surrounding quotes if any
+            image_path = image_path.strip('"\'')
+            
             if not os.path.exists(image_path):
                 print(f"Error: File '{image_path}' not found.")
                 continue
@@ -175,7 +186,13 @@ def main():
                 
             try:
                 print("Generating caption...")
-                result = predictor.predict(image_path, prompt)
+                result = predictor.predict(
+                    image_path, 
+                    prompt, 
+                    temperature=args.temperature,
+                    top_p=args.top_p,
+                    num_beams=args.num_beams
+                )
                 print("\nGenerated Caption:")
                 print(result)
             except Exception as e:

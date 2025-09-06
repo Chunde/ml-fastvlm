@@ -51,7 +51,11 @@ def create_batch_file(image_dir, output_file, recursive=False):
     try:
         with open(output_path, 'w') as f:
             for image_file in image_files:
-                f.write(f"{image_file}\n")
+                # Quote paths that contain spaces
+                if ' ' in str(image_file):
+                    f.write(f'"{image_file}"\n')
+                else:
+                    f.write(f"{image_file}\n")
         print(f"Successfully created batch file with {len(image_files)} images: {output_path}")
         return True
     except Exception as e:

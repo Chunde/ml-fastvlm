@@ -71,6 +71,10 @@ This script provides two modes:
 1. **Interactive Mode**: Enter image paths one by one after the model loads
 2. **Batch Mode**: Process multiple images from a list file
 
+Features:
+- Much faster: The model is loaded only once, not for each image
+- Handles file paths with spaces and special characters correctly
+
 See [README_INTERACTIVE.md](README_INTERACTIVE.md) for detailed instructions.
 
 ### Inference on Apple Silicon
