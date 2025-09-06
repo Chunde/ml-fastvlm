@@ -77,6 +77,21 @@ Features:
 
 See [README_INTERACTIVE.md](README_INTERACTIVE.md) for detailed instructions.
 
+### Graphical User Interface
+For a more user-friendly experience, we provide a GUI version:
+
+```bash
+python predict_gui.py --model-path /path/to/checkpoint-dir
+```
+
+Features:
+- Visual interface with buttons for file selection
+- Image preview display
+- Adjustable generation parameters
+- Real-time caption output
+
+See [README_TOOLS.md](README_TOOLS.md) for detailed instructions on all available tools.
+
 ### Inference on Apple Silicon
 To run inference on Apple Silicon, pytorch checkpoints have to be exported to format 
 suitable for running on Apple Silicon, detailed instructions and code can be found [`model_export`](model_export/) subfolder.
